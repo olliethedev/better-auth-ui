@@ -1,5 +1,5 @@
 {
-    "name": "@btst/stack/plugins/better-auth-ui",
+    "name": "@btst/better-auth-ui",
     "homepage": "https://www.better-stack.ai/",
     "version": "0.0.1",
     "description": "Plug & play shadcn/ui components for better-auth",
