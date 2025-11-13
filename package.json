@@ -5,7 +5,7 @@
     "description": "Plug & play shadcn/ui components for better-auth",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/olliethedev/better-auth-ui.git"
+        "url": "git+https://github.com/better-stack-ai/better-auth-ui.git"
     },
     "scripts": {
         "build": "tsup --clean --dts && cp src/style.css dist/style.css",
