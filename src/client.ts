@@ -1,7 +1,10 @@
 import { createRoute, defineClientPlugin } from "@btst/stack/plugins/client"
-import type { QueryClient } from "@tanstack/react-query"
 import { lazy } from "react"
-import { authViewPaths } from "./lib/view-paths"
+import {
+    accountViewPaths,
+    authViewPaths,
+    organizationViewPaths
+} from "./lib/view-paths"
 
 /**
  * Configuration for auth client plugin
@@ -233,6 +236,157 @@ export const authClientPlugin = (
                         PageComponent: AcceptInvitationCard
                     }
                 }
+            ),
+            // Account views
+            accountSettings: createRoute(
+                `/${accountViewPaths.SETTINGS}`,
+                () => {
+                    const AccountView = lazy(() =>
+                        import("./components/account/account-view").then(
+                            (m) => ({
+                                default: m.AccountView
+                            })
+                        )
+                    )
+
+                    return {
+                        PageComponent: AccountView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${accountViewPaths.SETTINGS}`,
+                            "Account Settings",
+                            "Manage your account settings"
+                        )
+                    }
+                }
+            ),
+            accountSecurity: createRoute(
+                `/${accountViewPaths.SECURITY}`,
+                () => {
+                    const AccountView = lazy(() =>
+                        import("./components/account/account-view").then(
+                            (m) => ({
+                                default: m.AccountView
+                            })
+                        )
+                    )
+
+                    return {
+                        PageComponent: AccountView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${accountViewPaths.SECURITY}`,
+                            "Security",
+                            "Manage your security settings"
+                        )
+                    }
+                }
+            ),
+            accountApiKeys: createRoute(`/${accountViewPaths.API_KEYS}`, () => {
+                const AccountView = lazy(() =>
+                    import("./components/account/account-view").then((m) => ({
+                        default: m.AccountView
+                    }))
+                )
+
+                return {
+                    PageComponent: AccountView,
+                    meta: createAuthMeta(
+                        config,
+                        `/${accountViewPaths.API_KEYS}`,
+                        "API Keys",
+                        "Manage your API keys"
+                    )
+                }
+            }),
+            accountOrganizations: createRoute(
+                `/${accountViewPaths.ORGANIZATIONS}`,
+                () => {
+                    const AccountView = lazy(() =>
+                        import("./components/account/account-view").then(
+                            (m) => ({
+                                default: m.AccountView
+                            })
+                        )
+                    )
+
+                    return {
+                        PageComponent: AccountView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${accountViewPaths.ORGANIZATIONS}`,
+                            "Organizations",
+                            "Manage your organizations"
+                        )
+                    }
+                }
+            ),
+            // Organization views
+            organizationSettings: createRoute(
+                `/${organizationViewPaths.SETTINGS}`,
+                () => {
+                    const OrganizationView = lazy(() =>
+                        import(
+                            "./components/organization/organization-view"
+                        ).then((m) => ({
+                            default: m.OrganizationView
+                        }))
+                    )
+
+                    return {
+                        PageComponent: OrganizationView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${organizationViewPaths.SETTINGS}`,
+                            "Organization Settings",
+                            "Manage your organization settings"
+                        )
+                    }
+                }
+            ),
+            organizationMembers: createRoute(
+                `/${organizationViewPaths.MEMBERS}`,
+                () => {
+                    const OrganizationView = lazy(() =>
+                        import(
+                            "./components/organization/organization-view"
+                        ).then((m) => ({
+                            default: m.OrganizationView
+                        }))
+                    )
+
+                    return {
+                        PageComponent: OrganizationView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${organizationViewPaths.MEMBERS}`,
+                            "Organization Members",
+                            "Manage organization members"
+                        )
+                    }
+                }
+            ),
+            organizationApiKeys: createRoute(
+                `/${organizationViewPaths.API_KEYS}`,
+                () => {
+                    const OrganizationView = lazy(() =>
+                        import(
+                            "./components/organization/organization-view"
+                        ).then((m) => ({
+                            default: m.OrganizationView
+                        }))
+                    )
+
+                    return {
+                        PageComponent: OrganizationView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${organizationViewPaths.API_KEYS}`,
+                            "Organization API Keys",
+                            "Manage organization API keys"
+                        )
+                    }
+                }
             )
         }),
         sitemap: async () => {
@@ -254,5 +408,193 @@ export const authClientPlugin = (
                     priority: 0.5
                 }
             ]
+        }
+    })
+
+/**
+ * Auth client plugin
+ * Provides routes, components, and meta for authentication flows
+ *
+ * @param config - Configuration including queryClient and URLs
+ */
+export const accountClientPlugin = (
+    config: AuthClientConfig
+): ReturnType<typeof defineClientPlugin> =>
+    defineClientPlugin({
+        name: "account",
+        routes: () => ({
+            
+            // Account views
+            accountSettings: createRoute(
+                `/${accountViewPaths.SETTINGS}`,
+                () => {
+                    const AccountView = lazy(() =>
+                        import("./components/account/account-view").then(
+                            (m) => ({
+                                default: m.AccountView
+                            })
+                        )
+                    )
+
+                    return {
+                        PageComponent: AccountView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${accountViewPaths.SETTINGS}`,
+                            "Account Settings",
+                            "Manage your account settings"
+                        )
+                    }
+                }
+            ),
+            accountSecurity: createRoute(
+                `/${accountViewPaths.SECURITY}`,
+                () => {
+                    const AccountView = lazy(() =>
+                        import("./components/account/account-view").then(
+                            (m) => ({
+                                default: m.AccountView
+                            })
+                        )
+                    )
+
+                    return {
+                        PageComponent: AccountView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${accountViewPaths.SECURITY}`,
+                            "Security",
+                            "Manage your security settings"
+                        )
+                    }
+                }
+            ),
+            accountApiKeys: createRoute(`/${accountViewPaths.API_KEYS}`, () => {
+                const AccountView = lazy(() =>
+                    import("./components/account/account-view").then((m) => ({
+                        default: m.AccountView
+                    }))
+                )
+
+                return {
+                    PageComponent: AccountView,
+                    meta: createAuthMeta(
+                        config,
+                        `/${accountViewPaths.API_KEYS}`,
+                        "API Keys",
+                        "Manage your API keys"
+                    )
+                }
+            }),
+            accountOrganizations: createRoute(
+                `/${accountViewPaths.ORGANIZATIONS}`,
+                () => {
+                    const AccountView = lazy(() =>
+                        import("./components/account/account-view").then(
+                            (m) => ({
+                                default: m.AccountView
+                            })
+                        )
+                    )
+
+                    return {
+                        PageComponent: AccountView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${accountViewPaths.ORGANIZATIONS}`,
+                            "Organizations",
+                            "Manage your organizations"
+                        )
+                    }
+                }
+            ),
+            
+        }),
+        sitemap: async () => {
+            return []
+        }
+    })
+
+/**
+ * Auth client plugin
+ * Provides routes, components, and meta for authentication flows
+ *
+ * @param config - Configuration including queryClient and URLs
+ */
+export const organizationClientPlugin = (
+    config: AuthClientConfig
+): ReturnType<typeof defineClientPlugin> =>
+    defineClientPlugin({
+        name: "organization",
+        routes: () => ({
+            organizationSettings: createRoute(
+                `/${organizationViewPaths.SETTINGS}`,
+                () => {
+                    const OrganizationView = lazy(() =>
+                        import(
+                            "./components/organization/organization-view"
+                        ).then((m) => ({
+                            default: m.OrganizationView
+                        }))
+                    )
+
+                    return {
+                        PageComponent: OrganizationView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${organizationViewPaths.SETTINGS}`,
+                            "Organization Settings",
+                            "Manage your organization settings"
+                        )
+                    }
+                }
+            ),
+            organizationMembers: createRoute(
+                `/${organizationViewPaths.MEMBERS}`,
+                () => {
+                    const OrganizationView = lazy(() =>
+                        import(
+                            "./components/organization/organization-view"
+                        ).then((m) => ({
+                            default: m.OrganizationView
+                        }))
+                    )
+
+                    return {
+                        PageComponent: OrganizationView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${organizationViewPaths.MEMBERS}`,
+                            "Organization Members",
+                            "Manage organization members"
+                        )
+                    }
+                }
+            ),
+            organizationApiKeys: createRoute(
+                `/${organizationViewPaths.API_KEYS}`,
+                () => {
+                    const OrganizationView = lazy(() =>
+                        import(
+                            "./components/organization/organization-view"
+                        ).then((m) => ({
+                            default: m.OrganizationView
+                        }))
+                    )
+
+                    return {
+                        PageComponent: OrganizationView,
+                        meta: createAuthMeta(
+                            config,
+                            `/${organizationViewPaths.API_KEYS}`,
+                            "Organization API Keys",
+                            "Manage organization API keys"
+                        )
+                    }
+                }
+            )
+        }),
+        sitemap: async () => {
+            return []
         }
     })
